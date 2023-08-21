@@ -10,9 +10,11 @@ import br.com.ada.catalogoFilmes.repository.FilmeRepository;
 public class FilmeService {
 
 	private FilmeRepository filmeRepository;
+	private CatalogoFilmeService catalogoFilmeService;
 
-    public FilmeService(FilmeRepository filmeRepository) {
+    public FilmeService(FilmeRepository filmeRepository, CatalogoFilmeService catalogoFilmeService) {
         this.filmeRepository = filmeRepository;
+        this.catalogoFilmeService = catalogoFilmeService;
     }
 
     public void cadastrarFilme(String nome, String dataLancamento, double orcamento, String descricao) {
@@ -43,7 +45,7 @@ public class FilmeService {
     }
     
     public List<Filme> listarFilmesMaisAvaliados() {
-        return filmeRepository.listarFilmes().stream()
+        return catalogoFilmeService.listarFilmes().stream()
             .sorted(Comparator.comparingDouble(this::calcularMediaAvaliacoes).reversed())
             .limit(10)
             .collect(Collectors.toList());

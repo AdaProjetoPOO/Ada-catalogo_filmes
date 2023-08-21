@@ -49,7 +49,8 @@ public class MenuController {
 			System.out.println("3 - Cadastrar Filme");
 			System.out.println("4 - Avaliar Filme");
 			System.out.println("5 - Filmes mais avaliados");
-			System.out.println("6 - Sair");
+			System.out.println("6 - Listar Filmes");
+			System.out.println("7 - Sair");
 			int opcao = scanner.nextInt();
 			switch (opcao) {
 			case 1:
@@ -68,6 +69,9 @@ public class MenuController {
 				filmesMaisAvaliados();
 				break;
 			case 6:
+				listarFilmes();
+				break;
+			case 7:
 				sair = true;
 				break;
 			default:
@@ -106,25 +110,25 @@ public class MenuController {
 	}
 
 	private void avaliarFilme() {
-	    System.out.println("Escolha um filme para avaliar:");
-	    List<Filme> filmes = catalogoFilmeService.listarFilmes();
-	    for (int i = 0; i < filmes.size(); i++) {
-	        System.out.println((i + 1) + " - " + filmes.get(i).getNome());
-	    }
-	    int opcao;
-	    do {
-	        while (!scanner.hasNextInt()) {
-	            System.out.println("Por favor, digite um número inteiro válido.");
-	            scanner.next();
-	        }
-	        opcao = scanner.nextInt();
-	    } while (opcao <= 0 || opcao > filmes.size());
-	    Filme filmeEscolhido = filmes.get(opcao - 1);
+		System.out.println("Escolha um filme para avaliar:");
+		List<Filme> filmes = catalogoFilmeService.listarFilmes();
+		for (int i = 0; i < filmes.size(); i++) {
+			System.out.println((i + 1) + " - " + filmes.get(i).getNome());
+		}
+		int opcao;
+		do {
+			while (!scanner.hasNextInt()) {
+				System.out.println("Por favor, digite um número inteiro válido.");
+				scanner.next();
+			}
+			opcao = scanner.nextInt();
+		} while (opcao <= 0 || opcao > filmes.size());
+		Filme filmeEscolhido = filmes.get(opcao - 1);
 
-	    System.out.println("Digite sua avaliação para o filme (0 a 10):");
-	    double avaliacao = scanner.nextDouble();
+		System.out.println("Digite sua avaliação para o filme (0 a 10):");
+		double avaliacao = scanner.nextDouble();
 
-	    filmeService.avaliarFilme(filmeEscolhido.getIdentificador(), avaliacao);
+		filmeService.avaliarFilme(filmeEscolhido.getIdentificador(), avaliacao);
 	}
 
 	private void filmesMaisAvaliados() {
@@ -151,35 +155,35 @@ public class MenuController {
 		boolean cadastrarAtor = true;
 		while (cadastrarAtor) {
 			System.out.println("Deseja cadastrar um ator para este filme? (S/N)");
-		    String resposta = scanner.next();
-		    if (resposta.equalsIgnoreCase("S")) {
-		        System.out.println("Deseja escolher(E) um ator da lista ou cadastrar(C) um novo? (E/C)");
-		        String escolha = scanner.next();
-		        if (escolha.equalsIgnoreCase("E")) {
-		            escolherAtor();
-		        } else {
-		            cadastrarAtor();
-		        }
-		    } else {
-		        cadastrarAtor = false;
-		    }
+			String resposta = scanner.next();
+			if (resposta.equalsIgnoreCase("S")) {
+				System.out.println("Deseja escolher(E) um ator da lista ou cadastrar(C) um novo? (E/C)");
+				String escolha = scanner.next();
+				if (escolha.equalsIgnoreCase("E")) {
+					escolherAtor();
+				} else {
+					cadastrarAtor();
+				}
+			} else {
+				cadastrarAtor = false;
+			}
 		}
 
 		boolean cadastrarDiretor = true;
 		while (cadastrarDiretor) {
 			System.out.println("Deseja cadastrar um diretor para este filme? (S/N)");
-		    String resposta = scanner.next();
-		    if (resposta.equalsIgnoreCase("S")) {
-		        System.out.println("Deseja escolher(E) um diretor da lista ou cadastrar(C) um novo? (E/C)");
-		        String escolha = scanner.next();
-		        if (escolha.equalsIgnoreCase("E")) {
-		            escolherDiretor();
-		        } else {
-		            cadastrarDiretor();
-		        }
-		    } else {
-		        cadastrarDiretor = false;
-		    }
+			String resposta = scanner.next();
+			if (resposta.equalsIgnoreCase("S")) {
+				System.out.println("Deseja escolher(E) um diretor da lista ou cadastrar(C) um novo? (E/C)");
+				String escolha = scanner.next();
+				if (escolha.equalsIgnoreCase("E")) {
+					escolherDiretor();
+				} else {
+					cadastrarDiretor();
+				}
+			} else {
+				cadastrarDiretor = false;
+			}
 		}
 
 		List<Filme> filmes = new ArrayList<>();
@@ -234,6 +238,14 @@ public class MenuController {
 		}
 		int opcao = scanner.nextInt();
 		Diretor diretorEscolhido = diretores.get(opcao - 1);
-		 System.out.println("Diretor escolhido: " + diretorEscolhido.getNome());
+		System.out.println("Diretor escolhido: " + diretorEscolhido.getNome());
+	}
+	
+	private void listarFilmes() {
+	    System.out.println("Lista de filmes cadastrados:");
+	    List<Filme> filmes = catalogoFilmeService.listarFilmes();
+	    for (int i = 0; i < filmes.size(); i++) {
+	        System.out.println((i + 1) + " - " + filmes.get(i).getNome());
+	    }
 	}
 }

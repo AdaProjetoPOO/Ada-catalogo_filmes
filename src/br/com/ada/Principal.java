@@ -17,7 +17,7 @@ public class Principal {
         CatalogoFimeRepository catalogoFilmeRepository = new CatalogoFimeRepository();
         CatalogoFilmeService catalogoFilmeService = new CatalogoFilmeService(catalogoFilmeRepository);
         DiretorService diretorService = new DiretorService(new DiretorRepository());
-        FilmeService filmeService = new FilmeService(new FilmeRepository());
+        FilmeService filmeService = new FilmeService(new FilmeRepository(), catalogoFilmeService);
         FilmeRepository filmeRepository = new FilmeRepository();
         MenuController menuController = new MenuController(atorService, catalogoFilmeService, diretorService, filmeService, catalogoFilmeRepository, filmeRepository);
         menuController.menuPrincipal();
