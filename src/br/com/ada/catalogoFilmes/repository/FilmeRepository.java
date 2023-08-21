@@ -37,4 +37,8 @@ public class FilmeRepository {
 		}
 		return null;
 	}
+	
+	public List<Filme> listarFilmes() {
+	    return filmeBanco;
+	}
 }

@@ -14,4 +14,8 @@ public abstract class Pessoa {
 		this.idade = idade;
 		this.sexo = sexo;
 	}
+	
+	public String getNome() {
+	    return nome;
+	}
 }

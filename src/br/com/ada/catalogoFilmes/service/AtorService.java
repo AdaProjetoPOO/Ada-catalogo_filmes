@@ -1,5 +1,7 @@
 package br.com.ada.catalogoFilmes.service;
 
+import java.util.List;
+
 import br.com.ada.catalogoFilmes.entity.Ator;
 import br.com.ada.catalogoFilmes.enuns.Sexo;
 import br.com.ada.catalogoFilmes.repository.AtorRepository;
@@ -26,5 +28,9 @@ public class AtorService {
 
 	public Ator buscarAtor(Integer identificador) {
 		return atorRepository.buscarAtor(identificador);
+	}
+	
+	public List<Ator> listarAtores() {
+	    return atorRepository.listarAtores();
 	}
 }

@@ -14,6 +14,7 @@ public class Filme {
 	private String descricao;
 	private Diretor diretor;
 	private List<Ator> atores;
+	 private List<Double> avaliacoes;
 	
 	public Filme() {}
 
@@ -24,6 +25,7 @@ public class Filme {
 		this.orcamento = orcamento;
 		this.descricao = descricao;
 		this.atores = new ArrayList<>();
+		 this.avaliacoes = new ArrayList<>();
 	}
 
 	public Integer getIdentificador() {
@@ -81,6 +83,10 @@ public class Filme {
 	public void setAtores(List<Ator> atores) {
 		this.atores = atores;
 	}
+	
+	public List<Double> getAvaliacoes() {
+        return avaliacoes;
+    }
 
 	@Override
 	public int hashCode() {

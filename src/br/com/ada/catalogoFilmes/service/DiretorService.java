@@ -1,5 +1,7 @@
 package br.com.ada.catalogoFilmes.service;
 
+import java.util.List;
+
 import br.com.ada.catalogoFilmes.entity.Diretor;
 import br.com.ada.catalogoFilmes.enuns.Sexo;
 import br.com.ada.catalogoFilmes.repository.DiretorRepository;
@@ -26,5 +28,9 @@ public class DiretorService {
 
     public Diretor buscarDiretor(Integer identificador) {
         return diretorRepository.buscarDiretor(identificador);
+    }
+    
+    public List<Diretor> listarDiretores() {
+        return diretorRepository.listarDiretores();
     }
 }

@@ -1,5 +1,9 @@
 package br.com.ada.catalogoFilmes.service;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import br.com.ada.catalogoFilmes.entity.Filme;
 import br.com.ada.catalogoFilmes.repository.FilmeRepository;
 
@@ -26,4 +30,30 @@ public class FilmeService {
     public Filme buscarFilme(Integer identificador) {
         return filmeRepository.buscarDiretor(identificador);
     }
+    
+    public List<Filme> listarFilmes() {
+        return filmeRepository.listarFilmes();
+    }
+    
+    public void avaliarFilme(Integer identificadorFilme, double avaliacao) {
+        Filme filme = filmeRepository.buscarDiretor(identificadorFilme);
+        if (filme != null) {
+            filme.getAvaliacoes().add(avaliacao);
+        }
+    }
+    
+    public List<Filme> listarFilmesMaisAvaliados() {
+        return filmeRepository.listarFilmes().stream()
+            .sorted(Comparator.comparingDouble(this::calcularMediaAvaliacoes).reversed())
+            .limit(10)
+            .collect(Collectors.toList());
+    }
+
+    private double calcularMediaAvaliacoes(Filme filme) {
+        return filme.getAvaliacoes().stream()
+            .mapToDouble(Double::doubleValue)
+            .average()
+            .orElse(0);
+    }
+    
 }

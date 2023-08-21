@@ -38,4 +38,8 @@ public class AtorRepository {
 		return null;
 	}
 	
+	  public List<Ator> listarAtores() {
+	        return atorBanco;
+	    }
+	
 }

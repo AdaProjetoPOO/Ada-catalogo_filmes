@@ -37,4 +37,8 @@ public class DiretorRepository {
 		}
 		return null;
 	}
+	
+	 public List<Diretor> listarDiretores() {
+	        return diretorBanco;
+	    }
 }

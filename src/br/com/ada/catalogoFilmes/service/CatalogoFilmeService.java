@@ -1,5 +1,6 @@
 package br.com.ada.catalogoFilmes.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.ada.catalogoFilmes.entity.CatalogoFilme;
@@ -27,5 +28,14 @@ public class CatalogoFilmeService {
 
 	public List<CatalogoFilme> getCatalogoFilmeBanco() {
 		return catalogoFilmeRepository.getCatalogoFilmeBanco();
+	}
+	
+	public List<Filme> listarFilmes() {
+	    List<CatalogoFilme> catalogos = getCatalogoFilmeBanco();
+	    List<Filme> filmes = new ArrayList<>();
+	    for (CatalogoFilme catalogo : catalogos) {
+	        filmes.addAll(catalogo.getFilmes());
+	    }
+	    return filmes;
 	}
 }
